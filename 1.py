@@ -41,8 +41,11 @@ if __name__ == '__main__':
 
     text: str = 'Если программист в 9-00 утра на работе, значит, он там и ночевал'
     print('{0}'.format(greatest_by_letter_inclusions_count(text)))
+
     print('Объем файла равен {0}Mb'.format(bytes_to_megabytes(217000000)))
+
     print('{0}'.format(sin(pi/6)))
+
     print('{0}'.format(0.1 + 0.2))
 
     a: int = 1
@@ -51,5 +54,5 @@ if __name__ == '__main__':
     a, b = swap(a, b)
     print('{0} -> {1}'.format(a, b))
 
-    print('{0}'.format(bin_to_dec(11)))
+    print('{0}'.format(bin_to_dec(110111)))
     print('done')
