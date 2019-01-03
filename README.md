@@ -7,5 +7,5 @@ First homework
 --------------
 
 ```bash
-python3 1.py
+python3 hw1.py
 ```
