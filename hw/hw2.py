@@ -40,7 +40,7 @@ def get_query_distribution(queries_param: List[str]) -> Dict[str, str]:
     :param queries_param: List of queries
     :return: Dict with percentage of queries per length in words
     """
-    words: List[str] = []
+    words: List[List[str]] = []
     for query in queries_param:
         words.append(query.split(' '))
 
