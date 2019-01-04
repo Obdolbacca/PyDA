@@ -34,7 +34,7 @@ def get_query_distribution(queries_param: list) -> dict:
     return final
 
 
-def get_channel_with_max_volume(stats: dict = {}) -> str:
+def get_channel_with_max_volume(stats: dict) -> str:
     max_volume_channel = ['', 0]
     for k, v in stats.items():
         if int(v) > max_volume_channel[1]:
@@ -56,7 +56,6 @@ def avg_views_per_user(stream: List[str]) -> float:
 def search_by_date_and_company(stats, date_param, company_param):
     date_company = {stat[0] + '_' + stat[1]: stat[2] for stat in stats}
     return date_company[date_param + '_' + company_param]
-
 
 
 if __name__ == '__main__':
