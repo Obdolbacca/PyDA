@@ -7,12 +7,12 @@ First homework
 --------------
 
 ```bash
-python3 hw1.py
+python3 hw/hw1.py
 ```
 
 Second homework
 ---------------
 
 ```bash
-python3 hw2.py
+python3 hw/hw2.py
 ```
