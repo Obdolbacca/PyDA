@@ -4,13 +4,13 @@ import requests
 import json
 
 
-def diag_sum(data: List[List[int]]) -> int:
-    return sum([data[i][i] for i in range(len(data))])
+def diag_sum(data_param: List[List[int]]) -> int:
+    return sum([data_param[i][i] for i in range(len(data))])
 
 
-def square_list(data: List[Union[int, str]]) -> int:
+def square_list(data_param: List[Union[int, str]]) -> int:
     numbers: List[int] = []
-    for elem in data:
+    for elem in data_param:
         try:
             numbers.append(int(elem))
         except ValueError:
