@@ -23,13 +23,13 @@ def sort_visits_dict_by_country(visits):
     return result
 
 
-def get_unique_ids(ids: Dict[str, List[int]]) -> List[int]:
+def get_unique_ids(ids_param: Dict[str, List[int]]) -> List[int]:
     """
     Get unique IDs
-    :param ids: Dict with IDs per user
+    :param ids_param: Dict with IDs per user
     :return: List of unique IDs
     """
-    l: list = ids.values()
+    l: list = ids_param.values()
     ret_l = [item for sublist in l for item in sublist]
     return list(set(ret_l))
 
@@ -57,28 +57,28 @@ def get_query_distribution(queries_param: List[str]) -> Dict[str, str]:
     return final
 
 
-def get_channel_with_max_volume(stats: Dict[str, int]) -> str:
+def get_channel_with_max_volume(stats_param: Dict[str, int]) -> str:
     """
     Get channel with maximal volume
-    :param stats: Dict with stats
+    :param stats_param: Dict with stats
     :return: Name of channel
     """
     max_volume_channel = ['', 0]
-    for k, v in stats.items():
+    for k, v in stats_param.items():
         if int(v) > max_volume_channel[1]:
             max_volume_channel = [k, v]
     return max_volume_channel[0]
 
 
-def avg_views_per_user(stream: List[str]) -> float:
+def avg_views_per_user(stream_param: List[str]) -> float:
     """
     Count average amount of views per user
-    :param stream: Stream of user views
+    :param stream_param: Stream of user views
     :return: Average amount of views per user
     """
     unique_users = set()
     counter = 0
-    for visit in stream:
+    for visit in stream_param:
         visit_parsed = visit.split(',')
         unique_users.add(visit_parsed[1])
         counter += int(visit_parsed[2])
@@ -86,16 +86,16 @@ def avg_views_per_user(stream: List[str]) -> float:
     return counter / len(unique_users)
 
 
-def search_by_date_and_company(stats: List[Union[int, str]], date_param: str, company_param: str):
+def search_by_date_and_company(stats_param: List[List[Union[int, str]]], date_param: str, company_param: str):
     """
     Search stats for given company and date
-    :param stats: Stats list
+    :param stats_param: Stats list
     :param date_param: Date to search
     :param company_param: Company name
     :rtype: int
     :return: Amount from stats for given company and date
     """
-    date_company = {stat[0] + '_' + stat[1]: stat[2] for stat in stats}
+    date_company = {stat[0] + '_' + stat[1]: stat[2] for stat in stats_param}
     return date_company[date_param + '_' + company_param]
 
 
@@ -166,4 +166,3 @@ stats = [
 ]
 
 print(search_by_date_and_company(stats, '2018-01-02', 'google'))
-
