@@ -30,14 +30,17 @@ class Fibonacci:
     def __init__(self, num_iterations: int):
         self._num_iterations = num_iterations
 
-    def gen_fib(self) -> List[int]:
+    def _gen_fib(self) -> List[int]:
         a, b = 0, 1
         for _ in range(1, self._num_iterations + 1):
             a, b = b, a + b
             yield a
 
     def fib(self):
-        return sum(list(self.gen_fib()))
+        return list(self._gen_fib())
+
+    def sum_fib(self):
+        return sum(self.fib())
 
 
 def get_currency_name() -> str:
@@ -67,4 +70,4 @@ if __name__ == '__main__':
 
     print(get_currency_name())
 
-    print(Fibonacci(8).fib())
+    print(Fibonacci(8).sum_fib())
