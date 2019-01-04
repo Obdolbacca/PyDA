@@ -9,3 +9,10 @@ First homework
 ```bash
 python3 hw1.py
 ```
+
+Second homework
+---------------
+
+```bash
+python3 hw2.py
+```
