@@ -1,3 +1,5 @@
+#  Copyright by Oleg Bobok (c) 2019. For educational purpose
+
 from typing import List
 
 
