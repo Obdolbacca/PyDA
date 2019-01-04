@@ -1,4 +1,7 @@
-from typing import List, Union
+from typing import List, Union, Dict
+
+import requests
+import json
 
 
 def diag_sum(data: List[List[int]]) -> int:
@@ -19,18 +22,31 @@ def square_list(data: List[Union[int, str]]) -> int:
 '''
 Хотел поиграть с генераторами
 '''
+
+
 class Fibonacci:
     def __init__(self, num_iterations: int):
         self._num_iterations = num_iterations
 
     def gen_fib(self) -> List[int]:
         a, b = 0, 1
-        for i in range(1, self._num_iterations + 1):
-            yield a
+        for _ in range(1, self._num_iterations + 1):
             a, b = b, a + b
+            yield a
 
     def fib(self):
-        return list(self.gen_fib())
+        return sum(list(self.gen_fib()))
+
+
+def get_currency_name() -> str:
+    response = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
+    ret = json.loads(response.text)
+    rate: List[str, float] = ['', 0.0]
+    for currency_name, currency in dict(ret['Valute']).items():
+        if currency['Value'] > rate[1]:
+            rate = [currency_name, currency['Value']]
+
+    return ret['Valute'][rate[0]]['Name']
 
 
 if __name__ == '__main__':
@@ -46,5 +62,7 @@ if __name__ == '__main__':
     data = [1, '5', 'abc', 20, '2']
 
     print(square_list(data))
+
+    print(get_currency_name())
 
     print(Fibonacci(8).fib())
