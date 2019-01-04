@@ -1,5 +1,9 @@
 #  Copyright by Oleg Bobok (c) 2019. For educational purpose
 
+"""
+Module for third homework
+"""
+
 from typing import List, Union
 
 import requests
@@ -7,14 +11,24 @@ import json
 
 
 def diag_sum(data_param: List[List[int]]) -> int:
+    """
+    Diagonal sum
+    :param data_param: NxN array of integers
+    :return: Sum of diagonal elements
+    """
     return sum([data_param[i][i] for i in range(len(data))])
 
 
 def square_list(data_param: List[Union[int, str]]) -> int:
+    """
+    Sum of squares
+    :param data_param: list of integers and strings
+    :return: sum of squares of all elements possible
+    """
     numbers: List[int] = []
     for elem in data_param:
         try:
-            numbers.append(int(elem))
+            numbers.append(int(elem) ** 2)
         except ValueError:
             pass
 
@@ -27,6 +41,9 @@ def square_list(data_param: List[Union[int, str]]) -> int:
 
 
 class Fibonacci:
+    """
+    Class for calculation of N first fibonacci numbers and its' sum
+    """
     def __init__(self, num_iterations: int):
         self._num_iterations = num_iterations
 
@@ -37,13 +54,27 @@ class Fibonacci:
             yield a
 
     def fib(self):
+        """
+        List of first fibonacci numbers
+        :rtype: List[int]
+        :return: list with n fibonacci numbers
+        """
         return list(self._gen_fib())
 
     def sum_fib(self):
+        """
+        Sum of first fibonacci numbers
+        :rtype: int
+        :return: sum of first N fibonacci numbers
+        """
         return sum(self.fib())
 
 
 def get_currency_name() -> str:
+    """
+    Currency name with greatest rate
+    :return: Name of currency with highest rate
+    """
     response = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
     ret = json.loads(response.text)
     rate: List[str, float] = ['', 0.0]

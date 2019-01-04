@@ -1,10 +1,21 @@
 #  Copyright by Oleg Bobok (c) 2019. For educational purpose
 
-from typing import List
+"""
+Module with second homework
+"""
+
+from typing import List, Dict, Union
 
 
-def sort_visits_dict_by_country(visits: dict):
-    result: dict = {}
+def sort_visits_dict_by_country(visits):
+    """
+    Get visits from Russia
+    :type visits: Dict[str, List[str, str]]
+    :param visits: Dict with all visits
+    :rtype: Dict[str, List[str, str]]
+    :return: Visits from Russia
+    """
+    result = {}
     for key, value in visits.items():
         if value[1] == 'Россия':
             result.update({key: value})
@@ -12,14 +23,24 @@ def sort_visits_dict_by_country(visits: dict):
     return result
 
 
-def get_unique_ids(ids: dict) -> list:
+def get_unique_ids(ids: Dict[str, List[int]]) -> List[int]:
+    """
+    Get unique IDs
+    :param ids: Dict with IDs per user
+    :return: List of unique IDs
+    """
     l: list = ids.values()
     ret_l = [item for sublist in l for item in sublist]
     return list(set(ret_l))
 
 
-def get_query_distribution(queries_param: list) -> dict:
-    words: list = []
+def get_query_distribution(queries_param: List[str]) -> Dict[str, str]:
+    """
+    Get query distribution
+    :param queries_param: List of queries
+    :return: Dict with percentage of queries per length in words
+    """
+    words: List[str] = []
     for query in queries_param:
         words.append(query.split(' '))
 
@@ -36,7 +57,12 @@ def get_query_distribution(queries_param: list) -> dict:
     return final
 
 
-def get_channel_with_max_volume(stats: dict) -> str:
+def get_channel_with_max_volume(stats: Dict[str, int]) -> str:
+    """
+    Get channel with maximal volume
+    :param stats: Dict with stats
+    :return: Name of channel
+    """
     max_volume_channel = ['', 0]
     for k, v in stats.items():
         if int(v) > max_volume_channel[1]:
@@ -45,6 +71,11 @@ def get_channel_with_max_volume(stats: dict) -> str:
 
 
 def avg_views_per_user(stream: List[str]) -> float:
+    """
+    Count average amount of views per user
+    :param stream: Stream of user views
+    :return: Average amount of views per user
+    """
     unique_users = set()
     counter = 0
     for visit in stream:
@@ -55,7 +86,15 @@ def avg_views_per_user(stream: List[str]) -> float:
     return counter / len(unique_users)
 
 
-def search_by_date_and_company(stats, date_param, company_param):
+def search_by_date_and_company(stats: List[Union[int, str]], date_param: str, company_param: str):
+    """
+    Search stats for given company and date
+    :param stats: Stats list
+    :param date_param: Date to search
+    :param company_param: Company name
+    :rtype: int
+    :return: Amount from stats for given company and date
+    """
     date_company = {stat[0] + '_' + stat[1]: stat[2] for stat in stats}
     return date_company[date_param + '_' + company_param]
 
