@@ -8,6 +8,7 @@ from typing import List, Union
 
 import requests
 import json
+from hw import HttpException
 
 
 def diag_sum(data_param: List[List[int]]) -> int:
@@ -16,7 +17,7 @@ def diag_sum(data_param: List[List[int]]) -> int:
     :param data_param: NxN array of integers
     :return: Sum of diagonal elements
     """
-    return sum([data_param[i][i] for i in range(len(data))])
+    return sum([data_param[i][i] for i in range(len(data_param))])
 
 
 def square_list(data_param: List[Union[int, str]]) -> int:
@@ -70,19 +71,30 @@ class Fibonacci:
         return sum(self.fib())
 
 
-def get_currency_name() -> str:
+class CurrencyProcessor:
     """
-    Currency name with greatest rate
-    :return: Name of currency with highest rate
+    Class for processing https://www.cbr-xml-daily.ru/daily_json.js
     """
-    response = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
-    ret = json.loads(response.text)
-    rate: List[str, float] = ['', 0.0]
-    for currency_name, currency in dict(ret['Valute']).items():
-        if currency['Value'] > rate[1]:
-            rate = [currency_name, currency['Value']]
+    def __init__(self):
+        """
+        :exception HttpException
+        """
+        self._response = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
+        if self._response.status_code != 200:
+            raise HttpException()
 
-    return ret['Valute'][rate[0]]['Name']
+    def get_currency_name(self) -> str:
+        """
+        Currency name with greatest rate
+        :return: Name of currency with highest rate
+        """
+        ret = json.loads(self._response.text)
+        rate: List[str, float] = ['', 0.0]
+        for currency_name, currency in dict(ret['Valute']).items():
+            if currency['Value'] > rate[1]:
+                rate = [currency_name, currency['Value']]
+
+        return ret['Valute'][rate[0]]['Name']
 
 
 if __name__ == '__main__':
@@ -99,6 +111,6 @@ if __name__ == '__main__':
 
     print(square_list(data))
 
-    print(get_currency_name())
+    print(CurrencyProcessor().get_currency_name())
 
     print(Fibonacci(8).sum_fib())

@@ -16,3 +16,10 @@ Second homework
 ```bash
 python3 hw/hw2.py
 ```
+
+Third homework
+--------------
+
+```bash
+python3 hw/hw3.py
+```
