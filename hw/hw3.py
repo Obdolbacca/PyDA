@@ -82,6 +82,7 @@ class CurrencyProcessor:
         """
         self._response = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
         if self._response.status_code != 200:
+            print('No answer from service!')
             raise HttpException(1)
 
     def get_currency_name(self) -> str:
